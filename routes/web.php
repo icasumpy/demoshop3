@@ -2,59 +2,43 @@
 
 use Illuminate\Support\Facades\Route;
 
-// Route::get('/', function () {
-//     return view('layout');
-// });
-
-
 Route::get('/trangchu', function() {
     return view('layout');
 });
-
 
 Route::get('/tintuc', function() {
     return view('news');
 });
 
+Route::get('/trang-tin', [App\Http\Controllers\NewsController::class, 'index']);
 
-Route::get('/trang-tin','App\Http\Controllers\NewsController@index');
+Route::get('/gioi-thieu', [App\Http\Controllers\NewsController::class, 'index2']);
 
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
 
-Route::get('/gioi-thieu','App\Http\Controllers\NewsController@index2');
+Route::get('trang-chu', [App\Http\Controllers\NewsController::class, 'index2']);
 
-Route::get('/','App\Http\Controllers\HomeController@index');
+Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index']);
 
-Route::get('trang-chu','App\Http\Controllers\NewsController@index2');
+Route::get('/dashboard', [App\Http\Controllers\AdminController::class, 'show_dashboard']); 
 
-Route::get('/admin','App\Http\Controllers\AdminController@index');
+Route::post('/admin-dashboard', [App\Http\Controllers\AdminController::class, 'dashboard']); 
 
-Route::get('/dashboard','App\Http\Controllers\AdminController@show_dashboard'); 
+Route::get('/logout', [App\Http\Controllers\AdminController::class, 'logout']);
 
-Route::post('/admin-dashboard','AdminController@dashboard'); 
+// Category Product Routes
+Route::get('/add-category-product', [App\Http\Controllers\CategoryProduct::class, 'add_category_product']); 
+Route::get('/all-category-product', [App\Http\Controllers\CategoryProduct::class, 'all_category_product']);
+Route::post('/save-category-product', [App\Http\Controllers\CategoryProduct::class, 'save_category_product']);
+Route::get('/unactive-categoryproduct/{category_product_id}', [App\Http\Controllers\CategoryProduct::class, 'unactive_category_product']);
+Route::get('/active-categoryproduct/{category_product_id}', [App\Http\Controllers\CategoryProduct::class, 'active_category_product']);
 
-Route::get('/logout','AdminController@logout');
-
-//Category Product 
-Route::get('/add-category-product', 'App\Http\Controllers\CategoryProduct@add_category_product'); 
-
-Route::get('/all-category-product', 'App\Http\Controllers\CategoryProduct@all_category_product');
-
-Route::post('/save-category-product','CategoryProduct@save_category_product');
-
-Route::get('/unactive-categoryproduct/{category_product_id}','CategoryProduct@unactive_category_product'); 
-Route::get('/active-categoryproduct/{category_product_id}','CategoryProduct@active_category_product');
-
-
-//Brand Product 
-Route::get('/add-brand-product','BrandProduct@add_brand_product'); 
-Route::get('/all-brand-product','BrandProduct@all_brand_product'); 
-Route::post('/save-brand-product','BrandProduct@save_brand_product'); 
-Route::get('/unactive-brand-product/{brand_product_id}','BrandProduct@unactive_brand_product'); 
-Route::get('/active-brand-product/{brand_product_id}','BrandProduct@active_brand_product');
-
-
-Route::get('/edit-brand-product/{brand_product_id}','BrandProduct@edit_brand_product');
-
-Route::post('/update-brand-product/{brand_product_id}','BrandProduct@update_brand_product'); 
-
-Route::get('/delete-brand-product/{brand_product_id}','BrandProduct@delete_brand_product');
+// Brand Product Routes
+Route::get('/add-brand-product', [App\Http\Controllers\BrandProduct::class, 'add_brand_product']); 
+Route::get('/all-brand-product', [App\Http\Controllers\BrandProduct::class, 'all_brand_product']);
+Route::post('/save-brand-product', [App\Http\Controllers\BrandProduct::class, 'save_brand_product']);
+Route::get('/unactive-brand-product/{brand_product_id}', [App\Http\Controllers\BrandProduct::class, 'unactive_brand_product']);
+Route::get('/active-brand-product/{brand_product_id}', [App\Http\Controllers\BrandProduct::class, 'active_brand_product']);
+Route::get('/edit-brand-product/{brand_product_id}', [App\Http\Controllers\BrandProduct::class, 'edit_brand_product']);
+Route::post('/update-brand-product/{brand_product_id}', [App\Http\Controllers\BrandProduct::class, 'update_brand_product']);
+Route::get('/delete-brand-product/{brand_product_id}', [App\Http\Controllers\BrandProduct::class, 'delete_brand_product']);
